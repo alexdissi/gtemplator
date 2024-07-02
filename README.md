@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Gtemplator
 
 ## Getting Started
 
-First, run the development server:
+Dans un premier temps cloner le projet
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone git@github.com:alexdissi/gtemplator.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+une fois cloner rendez vous a la racine du projet puis executer la commande suivante
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Pour lancer le projet
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Structure du projet
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Pour le package manager nous allons utiliser pnpm qui est un package manager plus rapide que npm et yarn.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Si vous souhaiter installer un package precis d'abord poster votre package dans le discord voir ce que les autre membre du groupe en pense puis une fois accepté isntaller votre package dans le projet avec
 
-## Deploy on Vercel
+```bash
+    pnpm add nom_du_package
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Backend
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Avec nextJS pour creer une route API il faudras dans le dossier src/app/api creer un dossier qui seras le nom de votre endpoint puis creer un fichier route.ts qui est tres important sinon votre endpoint ne fonctionneras pas
+
+https://nextjs.org/docs/app/building-your-application/routing
+
+### Frontend
+
+Pour le frontend tout se passeras dans le dossier src/app/nomdudossier, chaque dossier est la route de votre application. Dans ce dossier veuillez ajouter un fichier page.tsx sans cela votre route seras innacessible. Exemple : src/app/home est la route de la page d'accueil www.localhost:3000/home
+
+### Components
+
+Pour les components vous pouvez les creer dans le dossier src/app/components et les importer dans vos pages.
+
+### Base de données
+
+Pour la bdd nous allons utilisé  prisma qui est un ORM de base de données .
+
+Pour creer un model il faudras creer votre model dans le fichier prisma/schema.prisma ( voir model deja present ) puis lancer la commande suivante
+
+```bash
+pnpx prisma migrate dev --name init
+```
+
+A la suite de cette commande prisma va creer un fichier de migration dans le dossier prisma/migrations et vous allez voir votre bdd se creer dans pgAdmin avec les tables que vous avez creer.
+
+
