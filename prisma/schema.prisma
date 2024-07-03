@@ -24,4 +24,65 @@ model User {
   updatedAt             DateTime?
   passwordResetToken    String?   @unique
   passwordResetTokenExp DateTime?
+  sessions     Session[]
+  designs      Design[]
+}
+
+model Template {
+  template_id  Int      @id @default(autoincrement())
+  name         String
+  description  String?
+  design_file  String?
+  customizations Customization[]
+}
+
+model Design {
+  design_id    Int      @id @default(autoincrement())
+  user         User     @relation(fields: [user_id], references: [user_id])
+  user_id      Int
+  name         String
+  design_file  String?
+  customizations Customization[]
+}
+
+model Customization {
+  customization_id Int      @id @default(autoincrement())
+  design           Design   @relation(fields: [design_id], references: [design_id])
+  design_id        Int
+  template         Template @relation(fields: [template_id], references: [template_id])
+  template_id      Int
+  color_scheme     String?
+  font_style       String?
+  layout           String?
+  preview          String?
+  contents         Content[]
+  deployments      Deployment[]
+}
+
+model Content {
+  content_id      Int      @id @default(autoincrement())
+  customization   Customization @relation(fields: [customization_id], references: [customization_id])
+  customization_id Int
+  type            String
+  source          String
+}
+
+model Session {
+  session_id      Int      @id @default(autoincrement())
+  user            User     @relation(fields: [user_id], references: [user_id])
+  user_id         Int
+  session_token   String
+  expiration_date DateTime
+}
+
+model Deployment {
+  deployment_id   Int      @id @default(autoincrement())
+  customization   Customization @relation(fields: [customization_id], references: [customization_id])
+  customization_id Int
+  platform        String
+  status          String
+  deployment_date DateTime
+  site_url        String?
+  ssh_login       String?
+  ssh_key         String?
 }
