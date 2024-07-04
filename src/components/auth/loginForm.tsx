@@ -87,9 +87,6 @@ export const LoginForm = () => {
               {errors.password?.message}
             </span>
             )}
-            <Link href={"/forgot-password"} className="text-xs text-primary">
-              Mot de passe oublié ?
-            </Link>
           </div>
           {submitting ? <LoadingButton /> : <Button>Se connecter</Button>}
         </form>
